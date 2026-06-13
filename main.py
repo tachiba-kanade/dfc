@@ -84,5 +84,48 @@ Decision: Reject project
 
 # phase : 1. Simple DCF Calculator in Python
 
+import matplotlib.pyplot as plt
 
 def intial_investments():
+    money =  float(input("initial investment: "))
+
+    cash_flow = []
+    for year in range(1, 6):
+        cf = float(input(f"cash flow for Year {year}: "))
+        cash_flow.append(cf)
+
+    discount = float(input("discount rate (%): ")) / 100
+
+
+    # calculate NVP
+
+    present = []
+    for year in range(1, 6):
+        pv = cash_flow[year - 1] / ((1 + discount) ** year)
+        present.append(pv)
+
+    npv = sum(present) - money
+
+
+    print("\nPresent Values:")
+
+    for year in range(1, 6):
+        print(f"Year {year}: {present[year - 1]}")
+
+    print(f"\nNPV = {npv:.2f}")
+
+    # Decision
+    if npv > 0:
+        print("Decision: ACCEPT the project")
+    else:
+        print("Decision: REJECT the project")
+
+    # Plot Cash Flows
+    years = ["Y1", "Y2", "Y3", "Y4", "Y5"]
+
+    plt.bar(years, cash_flow)
+    plt.title("Future Cash Flows")
+    plt.xlabel("Year")
+    plt.ylabel("Cash Flow")
+    plt.show()
+
