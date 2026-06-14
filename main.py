@@ -129,3 +129,4 @@ def intial_investments():
     plt.ylabel("Cash Flow")
     plt.show()
 
+intial_investments()
